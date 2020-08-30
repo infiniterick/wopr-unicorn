@@ -41,7 +41,7 @@ namespace Wopr.Unicorn {
          public AddReaction ProcessImage(ImageDownloaded image){
             using(var client = redis.GetClient()){
                 string watchkey = $"{RedisPaths.WatchedContent}:{image.MessageId}";
-                var result = http.GetAsync($"http://detector:9000/wopr?id={image.MessageId}").Result;
+                var result = http.GetAsync($"http://detector:5000/wopr?id={image.MessageId}").Result;
                 Console.WriteLine($"{image.MessageId} - {result.StatusCode}");                
                 if(result.IsSuccessStatusCode){
                     var json = result.Content.ReadAsStringAsync().Result;
