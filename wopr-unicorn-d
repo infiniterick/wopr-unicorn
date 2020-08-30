@@ -1,0 +1,10 @@
+#!/bin/sh
+if [ -z "$1" ] ; then
+    echo "usage: wopr-unicorn-d <secrets dir>"
+    exit 1
+fi
+
+sudo docker rm -f wopr-unicorn
+sudo docker run --name wopr-unicorn -d --restart unless-stopped --network hainet -v $1:/secrets -v $2:/imagecache wopr-unicorn-arm:latest
+sudo docker logs wopr-unicorn
+
